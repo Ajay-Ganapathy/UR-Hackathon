@@ -3,7 +3,7 @@ import { useState } from 'react';
 import alanBtn from "@alan-ai/alan-sdk-web";
 const PatientDashboard = () => {
   const [health,setHealth] = useState([])
-  const [tips,setTips] = useState(["Tip 1" , "Tip 2"])
+  const [tips,setTips] = useState([])
 
     useEffect(() => {
         alanBtn({
@@ -17,6 +17,10 @@ const PatientDashboard = () => {
                   setTips(commandData.data)
                   console.log(tips)
                }
+               if (commandData.command === 'gettip1') {
+                setTips(commandData.data)
+                console.log(tips)
+             }
             }
         });
     }, []);
@@ -196,11 +200,11 @@ const PatientDashboard = () => {
         <div class="max-w-screen-xl px-4 py-15 mx-auto sm:px-6 lg:px-8">
           <div class="max-w-lg mx-auto text-center">
            
-            <h1 className={" mb-16 pb-2 font-bold sm:text-xl text-2xl md:text-3xl text-center"}>
+           {health.length>0 && <h1 className={" mb-16 pb-2 font-bold sm:text-xl text-2xl md:text-3xl text-center"}>
               Suggested HealthCare Policies
              
               <div className=""></div>
-            </h1>
+            </h1>} 
           </div>
 
           {
@@ -242,7 +246,7 @@ const PatientDashboard = () => {
                 </div>
              }
            
-         {tips.length>0 && <h1>Here are some of the suggestions</h1>}
+         {tips.length>0 && <h1 className={" mb-16 pb-2 font-bold sm:text-xl text-2xl md:text-3xl text-center"}>Here are some of the suggestions</h1>}
          {
           
           tips.map((tip) => <>
